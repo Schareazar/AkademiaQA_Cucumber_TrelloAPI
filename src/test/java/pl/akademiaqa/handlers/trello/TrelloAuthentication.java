@@ -5,7 +5,6 @@ import lombok.SneakyThrows;
 
 import java.util.Properties;
 
-@Singleton
 public class TrelloAuthentication {
 
     private final static Properties PROPERTIES = new Properties();

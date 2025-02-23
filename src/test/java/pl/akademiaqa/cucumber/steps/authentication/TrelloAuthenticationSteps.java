@@ -9,7 +9,6 @@ public class TrelloAuthenticationSteps {
 
     @Given("User is authenticated on Trello")
     public void user_is_authenticated_on_trello() {
-        System.out.println(trelloAuthentication.getKey() + trelloAuthentication.getToken());
     }
 
 }

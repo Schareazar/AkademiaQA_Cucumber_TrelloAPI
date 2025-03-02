@@ -1,4 +1,4 @@
-package pl.akademiaqa.handlers.trello;
+package pl.akademiaqa.handlers.trello.authentication;
 
 import groovy.lang.Singleton;
 import lombok.SneakyThrows;

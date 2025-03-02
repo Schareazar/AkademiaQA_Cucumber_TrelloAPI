@@ -7,17 +7,17 @@ import pl.akademiaqa.handlers.api.RequestHandler;
 import static io.restassured.RestAssured.given;
 
 @RequiredArgsConstructor
-
-public class CreateBoardRequest {
+public class ReadBoardRequest {
 
     private final BaseRequest baseRequest;
+    private final RequestHandler requestHandler;
 
-    public Response createBoard(RequestHandler requestHandler) {
+    public Response readBoard(RequestHandler requestHandler) {
 
         return given()
-                .spec(baseRequest.requestSetup(requestHandler.getQueryParams()))
+                .spec(baseRequest.requestSetup(requestHandler.getQueryParams(), requestHandler.getPathParams()))
                 .when()
-                .post(requestHandler.getEndpoint())
+                .get(requestHandler.getEndpoint() + "{id}")
                 .then()
                 .log().ifError()
                 .extract()

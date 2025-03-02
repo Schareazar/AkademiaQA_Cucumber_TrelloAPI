@@ -2,8 +2,8 @@ package pl.akademiaqa.cucumber.steps.authentication;
 
 import io.cucumber.java.en.Given;
 import lombok.RequiredArgsConstructor;
-import pl.akademiaqa.handlers.trello.TrelloAuthentication;
-import pl.akademiaqa.handlers.trello.api.RequestHandler;
+import pl.akademiaqa.handlers.trello.authentication.TrelloAuthentication;
+import pl.akademiaqa.handlers.api.RequestHandler;
 
 @RequiredArgsConstructor
 public class TrelloAuthenticationSteps {

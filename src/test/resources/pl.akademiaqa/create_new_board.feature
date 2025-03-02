@@ -4,5 +4,5 @@ Feature: Create new board
 
     Given User is authenticated on Trello
     When User creates a new board
-    Then User can see board created on the board list
+    Then User can see created board details
 

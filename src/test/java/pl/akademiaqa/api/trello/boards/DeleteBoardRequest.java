@@ -7,19 +7,20 @@ import pl.akademiaqa.handlers.api.RequestHandler;
 import static io.restassured.RestAssured.given;
 
 @RequiredArgsConstructor
-public class ReadBoardRequest {
+public class DeleteBoardRequest {
 
     private final BaseRequest baseRequest;
 
-    public Response readBoard(RequestHandler requestHandler) {
+    public Response deleteBoard(RequestHandler requestHandler) {
 
         return given()
                 .spec(baseRequest.requestSetup(requestHandler.getQueryParams(), requestHandler.getPathParams()))
                 .when()
-                .get(requestHandler.getEndpoint() + "{id}")
+                .delete(requestHandler.getEndpoint() + "{id}")
                 .then()
                 .log().ifError()
                 .extract()
                 .response();
     }
+
 }

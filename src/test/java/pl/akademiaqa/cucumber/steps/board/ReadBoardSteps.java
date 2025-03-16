@@ -20,22 +20,31 @@ public class ReadBoardSteps {
 
     @Then("User can see created board details")
     public void user_can_see_created_board_details() {
-        Response readBoardResponse = readBoard();
+        Response readBoardResponse = readBoard(CommonValues.BOARDNAME);
 
         Assertions.assertThat(readBoardResponse.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
         Assertions.assertThat(readBoardResponse.getBody().jsonPath().getString("name"))
                 .isEqualTo(CommonValues.BOARDNAME);
     }
 
+    @Then("User can see special board details")
+    public void user_can_see_special_board_details() {
+        Response readBoardResponse = readBoard(CommonValues.SPECIALBOARDNAME);
+
+        Assertions.assertThat(readBoardResponse.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
+        Assertions.assertThat(readBoardResponse.getBody().jsonPath().getString("name"))
+                .isEqualTo(CommonValues.SPECIALBOARDNAME);
+    }
+
     @Then("Board can't be accessed anymore")
     public void board_can_t_be_accessed_anymore() {
-        Response readBoardResponse = readBoard();
+        Response readBoardResponse = readBoard(CommonValues.BOARDNAME);
 
         Assertions.assertThat(readBoardResponse.getStatusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
     }
 
-    private Response readBoard() {
-        String boardId = context.getBoards().get(CommonValues.BOARDNAME);
+    private Response readBoard(String boardName) {
+        String boardId = context.getBoards().get(boardName);
 
         requestHandler.setEndpoint(TrelloUrls.BOARDS);
         requestHandler.addPathParam("id", boardId);

@@ -10,8 +10,7 @@ public class Context {
 
     private Map<String, String> boards = new HashMap<>();
 
-    public void add(String boardName, String boardId)
-    {
+    public void addBoard(String boardName, String boardId) {
         boards.put(boardName, boardId);
     }
 }

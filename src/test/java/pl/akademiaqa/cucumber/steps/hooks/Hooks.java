@@ -18,16 +18,15 @@ public class Hooks {
     private final DeleteBoardRequest deleteBoardRequest;
 
     @After(value = "@cleanup")
-    public void afterScenario()
-    {
-    context.getBoards().values()
-            .forEach(boardId ->
-            {
-                requestHandler.setEndpoint(TrelloUrls.BOARDS);
-                requestHandler.addPathParam("id", boardId);
-                Response response = deleteBoardRequest.deleteBoard(requestHandler);
-                Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
-            });
+    public void afterScenario() {
+        context.getBoards().values()
+                .forEach(boardId ->
+                {
+                    requestHandler.setEndpoint(TrelloUrls.BOARDS);
+                    requestHandler.addPathParam("id", boardId);
+                    Response response = deleteBoardRequest.deleteBoard(requestHandler);
+                    Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
+                });
     }
 
 }

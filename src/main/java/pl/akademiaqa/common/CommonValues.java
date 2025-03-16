@@ -7,4 +7,5 @@ import lombok.NoArgsConstructor;
 public class CommonValues {
 
     public static final String BOARDNAME = "Cucumber Board";
+    public static final String SPECIALBOARDNAME = "!@~#$%^&*()-+=.,][;'<>?/ TEST";
 }

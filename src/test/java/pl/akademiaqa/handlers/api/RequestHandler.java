@@ -20,8 +20,7 @@ public class RequestHandler {
         queryParams.put(key, value);
     }
 
-    public void addPathParam(String key, String value)
-    {
+    public void addPathParam(String key, String value) {
         pathParams.put(key, value);
     }
 }

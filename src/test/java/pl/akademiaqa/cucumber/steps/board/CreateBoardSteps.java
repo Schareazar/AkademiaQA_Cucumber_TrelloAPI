@@ -23,24 +23,29 @@ public class CreateBoardSteps {
     @When("User creates a new board")
     public void user_creates_a_new_board() {
 
-        createBoard();
+        createBoard(CommonValues.BOARDNAME);
+    }
+
+    @When("User creates a new board with name starting with a special sign")
+    public void user_creates_a_new_board_with_name_starting_with_a_special_sign() {
+        createBoard(CommonValues.SPECIALBOARDNAME);
     }
 
     @Given("the board exists")
     public void the_board_exists() {
 
-        createBoard();
+        createBoard(CommonValues.BOARDNAME);
     }
 
-    private void createBoard() {
+    private void createBoard(String boardName) {
         requestHandler.setEndpoint(TrelloUrls.BOARDS);
-        requestHandler.addQueryParam("name", CommonValues.BOARDNAME);
+        requestHandler.addQueryParam("name", boardName);
 
         responseHandler.setResponse(createBoardRequest.createBoard(requestHandler));
 
         Assertions.assertThat(responseHandler.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
 
-        context.add(CommonValues.BOARDNAME, responseHandler.getId());
+        context.addBoard(boardName, responseHandler.getId());
     }
 
 }

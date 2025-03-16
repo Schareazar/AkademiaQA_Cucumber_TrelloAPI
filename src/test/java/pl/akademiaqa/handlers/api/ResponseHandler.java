@@ -12,6 +12,10 @@ public class ResponseHandler {
         return response.getBody().jsonPath().getString("id");
     }
 
+    public String getMessage() {
+        return response.getBody().jsonPath().getString("message");
+    }
+
     public int getStatusCode() {
         return response.getStatusCode();
     }

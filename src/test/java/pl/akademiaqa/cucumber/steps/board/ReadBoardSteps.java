@@ -36,11 +36,16 @@ public class ReadBoardSteps {
                 .isEqualTo(CommonValues.SPECIALBOARDNAME);
     }
 
-    @Then("Board can't be accessed anymore")
-    public void board_can_t_be_accessed_anymore() {
+    @Then("Board can't be accessed")
+    public void board_can_t_be_accessed() {
         Response readBoardResponse = readBoard(CommonValues.BOARDNAME);
-
         Assertions.assertThat(readBoardResponse.getStatusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
+    }
+
+    @Then("An error is returned when trying to access the board")
+    public void an_error_is_returned_when_trying_to_access_the_board() {
+        Response readBoardResponse = readBoard(CommonValues.BOARDNAME);
+        Assertions.assertThat(readBoardResponse.getStatusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
     }
 
     private Response readBoard(String boardName) {

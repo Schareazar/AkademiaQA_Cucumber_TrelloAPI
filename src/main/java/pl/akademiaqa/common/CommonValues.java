@@ -8,4 +8,5 @@ public class CommonValues {
 
     public static final String BOARDNAME = "Cucumber Board";
     public static final String SPECIALBOARDNAME = "!@~#$%^&*()-+=.,][;'<>?/ TEST";
+    public static final String EMPTY = "";
 }

@@ -26,10 +26,17 @@ public class CreateBoardSteps {
         Assertions.assertThat(responseHandler.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
     }
 
+    //my solution
     @When("User creates a new board with name starting with a special sign")
     public void user_creates_a_new_board_with_name_starting_with_a_special_sign() {
         createBoard(CommonValues.SPECIALBOARDNAME);
         Assertions.assertThat(responseHandler.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
+    }
+
+    //kita solution
+    @When("User creates a new board with name {string}")
+    public void user_creates_a_new_board_with_name(String boardName) {
+        createBoard(boardName);
     }
 
     @When("User tries to create a new board without a name")

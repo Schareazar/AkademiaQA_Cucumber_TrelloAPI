@@ -5,10 +5,10 @@ import io.restassured.response.Response;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpStatus;
 import org.assertj.core.api.Assertions;
-import pl.akademiaqa.api.trello.boards.ReadBoardRequest;
+import pl.akademiaqa.api.trello.ReadRequest;
 import pl.akademiaqa.common.CommonValues;
-import pl.akademiaqa.handlers.api.RequestHandler;
-import pl.akademiaqa.handlers.api.ResponseHandler;
+import pl.akademiaqa.handlers.trello.api.RequestHandler;
+import pl.akademiaqa.handlers.trello.api.ResponseHandler;
 import pl.akademiaqa.handlers.shared.Context;
 import pl.akademiaqa.urls.TrelloUrls;
 
@@ -17,7 +17,7 @@ public class ReadBoardSteps {
 
     private final RequestHandler requestHandler;
     private final ResponseHandler responseHandler;
-    private final ReadBoardRequest readBoardRequest;
+    private final ReadRequest readRequest;
     private final Context context;
 
     @Then("User can see created board details")
@@ -48,6 +48,14 @@ public class ReadBoardSteps {
                 .isEqualTo(boardName);
     }
 
+    @Then("User can see board with updated name {string}")
+    public void user_can_see_board_with_updated_name(String boardName) {
+        Response readBoardResponse = readBoard(CommonValues.BOARDNAME);
+        Assertions.assertThat(readBoardResponse.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
+        Assertions.assertThat(readBoardResponse.getBody().jsonPath().getString("name"))
+                .isEqualTo(boardName);
+    }
+
     @Then("Board can't be accessed")
     public void board_can_t_be_accessed() {
         Response readBoardResponse = readBoard(CommonValues.BOARDNAME);
@@ -67,7 +75,7 @@ public class ReadBoardSteps {
         requestHandler.setEndpoint(TrelloUrls.BOARDS);
         requestHandler.addPathParam("id", boardId);
 
-        return readBoardRequest.readBoard(requestHandler);
+        return readRequest.read(requestHandler);
     }
 
 }

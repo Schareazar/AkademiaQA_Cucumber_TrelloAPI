@@ -5,17 +5,17 @@ import io.cucumber.java.en.When;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpStatus;
 import org.assertj.core.api.Assertions;
-import pl.akademiaqa.api.trello.boards.CreateBoardRequest;
+import pl.akademiaqa.api.trello.CreateRequest;
 import pl.akademiaqa.common.CommonValues;
-import pl.akademiaqa.handlers.api.RequestHandler;
-import pl.akademiaqa.handlers.api.ResponseHandler;
+import pl.akademiaqa.handlers.trello.api.RequestHandler;
+import pl.akademiaqa.handlers.trello.api.ResponseHandler;
 import pl.akademiaqa.handlers.shared.Context;
 import pl.akademiaqa.urls.TrelloUrls;
 
 @RequiredArgsConstructor
 public class CreateBoardSteps {
 
-    private final CreateBoardRequest createBoardRequest;
+    private final CreateRequest createRequest;
     private final RequestHandler requestHandler;
     private final ResponseHandler responseHandler;
     private final Context context;
@@ -51,7 +51,7 @@ public class CreateBoardSteps {
         requestHandler.setEndpoint(TrelloUrls.BOARDS);
         requestHandler.addQueryParam("name", CommonValues.BOARDNAME);
 
-        responseHandler.setResponse(createBoardRequest.createBoard(requestHandler));
+        responseHandler.setResponse(createRequest.create(requestHandler));
 
         Assertions.assertThat(responseHandler.getStatusCode()).isEqualTo(HttpStatus.SC_UNAUTHORIZED);
     }
@@ -65,7 +65,7 @@ public class CreateBoardSteps {
         requestHandler.setEndpoint(TrelloUrls.BOARDS);
         requestHandler.addQueryParam("name", boardName);
 
-        responseHandler.setResponse(createBoardRequest.createBoard(requestHandler));
+        responseHandler.setResponse(createRequest.create(requestHandler));
 
         context.addBoard(boardName, responseHandler.getId());
     }

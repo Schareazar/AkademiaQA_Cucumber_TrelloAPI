@@ -1,4 +1,4 @@
-Feature: Create new board
+Feature: Creating new board
 
   @cleanup
   Scenario: User can create a new board with valid data

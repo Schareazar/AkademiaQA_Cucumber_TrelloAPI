@@ -1,4 +1,4 @@
-Feature:
+Feature: Deleting board
 
   Scenario: User can delete existing board
 

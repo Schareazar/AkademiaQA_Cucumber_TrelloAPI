@@ -1,4 +1,4 @@
-package pl.akademiaqa.handlers.api;
+package pl.akademiaqa.handlers.trello.api;
 
 import io.restassured.response.Response;
 import lombok.Data;

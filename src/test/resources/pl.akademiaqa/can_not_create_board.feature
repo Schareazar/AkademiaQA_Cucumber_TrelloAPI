@@ -1,4 +1,4 @@
-Feature:
+Feature: Attempting to create board when not possible
 
   Scenario: User can not create a new board when not authenticated
     Given User is not authenticated on Trello

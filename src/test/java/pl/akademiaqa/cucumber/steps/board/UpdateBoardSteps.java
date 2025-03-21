@@ -4,7 +4,7 @@ import io.cucumber.java.en.When;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpStatus;
 import org.assertj.core.api.Assertions;
-import pl.akademiaqa.api.trello.DeleteRequest;
+import pl.akademiaqa.api.trello.UpdateRequest;
 import pl.akademiaqa.common.CommonValues;
 import pl.akademiaqa.handlers.trello.api.RequestHandler;
 import pl.akademiaqa.handlers.trello.api.ResponseHandler;
@@ -12,24 +12,24 @@ import pl.akademiaqa.handlers.shared.Context;
 import pl.akademiaqa.urls.TrelloUrls;
 
 @RequiredArgsConstructor
-public class DeleteBoardSteps {
+public class UpdateBoardSteps {
 
-    private final DeleteRequest deleteRequest;
     private final RequestHandler requestHandler;
-    private final ResponseHandler responseHandler;
+    private final UpdateRequest updateRequest;
     private final Context context;
+    private final ResponseHandler responseHandler;
 
-    @When("User deletes existing board")
-    public void user_deletes_existing_board() {
-
-        String boardId = context.getBoards().get(CommonValues.BOARDNAME);
+    @When("User changes board name to {string}")
+    public void user_changes_board_name_to(String boardName) {
 
         requestHandler.setEndpoint(TrelloUrls.BOARDS);
-        requestHandler.addPathParam("id", boardId);
+        requestHandler.addPathParam("id", context.getBoards().get(CommonValues.BOARDNAME));
+        requestHandler.addQueryParam("name", boardName);
 
-        responseHandler.setResponse(deleteRequest.delete(requestHandler));
+        responseHandler.setResponse(updateRequest.update(requestHandler));
 
         Assertions.assertThat(responseHandler.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
+
     }
 
 }

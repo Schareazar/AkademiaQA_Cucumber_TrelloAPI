@@ -10,4 +10,3 @@ Feature: Moving card between lists
     And User creates list "MY SECOND LIST" on "MY BOARD"
     When User moves "MY FIRST CARD" to "MY SECOND LIST"
     Then User can see "MY FIRST CARD" on "MY SECOND LIST"
-

@@ -1,6 +1,7 @@
 package pl.akademiaqa.cucumber.steps.board;
 
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpStatus;
@@ -27,6 +28,12 @@ public class ReadBoardSteps {
         Assertions.assertThat(readBoardResponse.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
         Assertions.assertThat(readBoardResponse.getBody().jsonPath().getString("name"))
                 .isEqualTo(CommonValues.BOARDNAME);
+    }
+
+    @When("User opens board")
+    public void user_opens_board() {
+        Response readBoardResponse = readBoard(CommonValues.BOARDNAME);
+        Assertions.assertThat(readBoardResponse.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
     }
 
     //my solution
